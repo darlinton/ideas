@@ -7,3 +7,5 @@ Tutorial implementation. Laravel 10 + Bootstrap
 
 - [Tutorial](https://www.youtube.com/playlist?list=PLqDySLfPKRn5d7WbN9R0yJA9IRgx-XBlU).
 - [Laravel](https://laravel.com/).
+
+video #18
