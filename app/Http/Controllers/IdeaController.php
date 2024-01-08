@@ -11,27 +11,6 @@ class IdeaController extends Controller
         return view('ideas.show', compact('idea'));
     }
 
-    public function edit(Idea $idea){
-        if(auth()->id() !== $idea->user_id){
-            abort(403);
-        }
-        $editing = true;
-        return view('ideas.show', compact('idea', 'editing'));
-    }
-
-    public function update(Idea $idea){
-        if(auth()->id() !== $idea->user_id){
-            abort(403);
-        }
-
-        $validated = request()->validate([
-            'content' => 'required|min:3|max:240'
-        ]);
-        $idea->update($validated);
-
-        return redirect()->route('ideas.show',$idea->id)->with('success', 'Idea updated successfully.');
-    }
-
     public function store(){
         //dump($_POST);
         //dump(request()->get('idea',''));
@@ -57,5 +36,26 @@ class IdeaController extends Controller
         $idea->delete();
 
         return redirect()->route('dashboard')->with('success', 'Idea deleted successfully.');
+    }
+
+    public function edit(Idea $idea){
+        if(auth()->id() !== $idea->user_id){
+            abort(403);
+        }
+        $editing = true;
+        return view('ideas.show', compact('idea', 'editing'));
+    }
+
+    public function update(Idea $idea){
+        if(auth()->id() !== $idea->user_id){
+            abort(403);
+        }
+
+        $validated = request()->validate([
+            'content' => 'required|min:3|max:240'
+        ]);
+        $idea->update($validated);
+
+        return redirect()->route('ideas.show',$idea->id)->with('success', 'Idea updated successfully.');
     }
 }
