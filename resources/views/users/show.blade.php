@@ -10,6 +10,18 @@
             <div class="mt-3">
                 @include('shared.user-card')
             </div>
+            <hr>
+            @forelse ($ideas as $idea)
+                <div class="mt-3">
+                    @include('shared.idea-card')
+                </div>
+            @empty
+                <p class="text-center my-3">No ideas found.</p>
+            @endforelse
+            <div class="mt-4">
+                {{ $ideas->withQueryString()->links() }}
+            </div>
+
         </div>
         <div class="col-3">
             @include('shared.search-bar')

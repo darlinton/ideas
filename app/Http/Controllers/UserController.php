@@ -13,7 +13,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('users.show', compact('user'));
+        $ideas = $user->ideas()->paginate(5);
+        return view('users.show', compact('user', 'ideas'));
     }
 
     /**
@@ -22,7 +23,8 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $editing = true;
-        return view('users.show', compact('user', 'editing'));
+        $ideas = $user->ideas()->paginate(5);
+        return view('users.show', compact('user', 'editing', 'ideas'));
     }
 
     /**
