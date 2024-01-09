@@ -40,6 +40,11 @@ class UserController extends Controller
             ]
         );
 
+        if (request()->has('image')) {
+            $imagePath = request()->file('image')->store('profile','public');
+            $validated['image'] = $imagePath;
+        }
+
         $user->update($validated);
 
         return redirect()->route('profile');

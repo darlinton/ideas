@@ -9,11 +9,10 @@
         </div>
     </form>
     <hr>
-    @foreach ($idea->comments as $comment )
+    @foreach ($idea->comments as $comment)
         <div class="d-flex align-items-start">
-            <img style="width:35px" class="me-2 avatar-sm rounded-circle"
-                src="https://api.dicebear.com/6.x/fun-emoji/svg?seed={{$comment->user->name}}"
-                alt="{{$comment->user->name}}">
+            <img style="width:35px" class="me-2 avatar-sm rounded-circle" src="{{ $comment->user->getImageURL() }}"
+                alt="User Avatar">
             <div class="w-100">
                 <div class="d-flex justify-content-between">
                     <h6 class="">{{ $comment->user->name }}
