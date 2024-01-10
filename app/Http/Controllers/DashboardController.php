@@ -9,11 +9,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        /**
-         * @param \App\Models\User
-         */
-        //return new WelcomeEmail(auth()->user());
-
         $ideas = Idea::orderBy('created_at', 'DESC');
 
         if(request()->has('search')) {
