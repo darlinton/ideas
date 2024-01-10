@@ -7,8 +7,8 @@
                     <span>Home</span></a>
             </li>
             <li class="nav-item">
-                <a class="{{ Request::is('terms') ? 'text-white bg-primary rounded' : '' }} nav-link"
-                    href="{{ url('terms') }}">
+                <a class="{{ Route::is('terms') ? 'text-white bg-primary rounded' : '' }} nav-link"
+                    href="{{ route('terms') }}">
                     <span>Terms</span></a>
             </li>
         </ul>
