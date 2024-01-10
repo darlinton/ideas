@@ -9,6 +9,9 @@ class FollowerController extends Controller
 {
     public function follow(User $user)
     {
+        /**
+        * @var User
+        */
         $follower = auth()->user();
         $follower->followings()->attach($user);
 
@@ -17,6 +20,9 @@ class FollowerController extends Controller
 
     public function unfollow(User $user)
     {
+        /**
+        * @var User
+        */
         $follower = auth()->user();
         $follower->followings()->detach($user);
 

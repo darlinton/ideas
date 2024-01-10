@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\WelcomeEmail;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
-    public function register() {
+    public function register()
+    {
         return view('auth.register');
     }
 
-    public function store() {
+    public function store()
+    {
         $validated = request()->validate([
             'name' => 'required|min:3|max:40',
             'email' => 'required|email|unique:users,email',
@@ -23,32 +27,39 @@ class AuthController extends Controller
                 'email' => $validated['email'],
                 'password' => Hash::make($validated['password']),
             ]
-            );
-        return redirect()->route('dashboard')->with('success','Account created Successfully!');
+        );
+
+        Mail::to($user->email)
+            ->send(new WelcomeEmail($user));
+
+        return redirect()->route('dashboard')->with('success', 'Account created Successfully!');
     }
-    public function login() {
+    public function login()
+    {
         return view('auth.login');
     }
 
-    public function authenticate() {
+    public function authenticate()
+    {
         $validated = request()->validate([
             'email' => 'required|email',
             'password' => 'required|min:8'
         ]);
 
-        if(auth()->attempt($validated)){
+        if (auth()->attempt($validated)) {
             request()->session()->regenerate();
-            return redirect()->route('dashboard')->with('success','Logged in successfully!');
+            return redirect()->route('dashboard')->with('success', 'Logged in successfully!');
         }
 
 
-        return redirect()->route('login')->withErrors(['email'=>"No matching user found with the porvided email and password"]);
+        return redirect()->route('login')->withErrors(['email' => "No matching user found with the porvided email and password"]);
     }
 
-    public function logout(){
+    public function logout()
+    {
         auth()->logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken();
-        return redirect()->route('dashboard')->with('success','logged out successfully');
+        return redirect()->route('dashboard')->with('success', 'logged out successfully');
     }
 }
