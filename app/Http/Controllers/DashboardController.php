@@ -9,14 +9,14 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $ideas = Idea::with('user','comments.user')->orderBy('created_at', 'DESC');
+        $ideas = Idea::orderBy('created_at', 'DESC');
 
-        if(request()->has('search')) {
-            $ideas = $ideas->where('content','like', '%' . request()->get('search','') . '%');
+        if (request()->has('search')) {
+            $ideas = $ideas->where('content', 'like', '%' . request()->get('search', '') . '%');
         }
 
         //dump(Idea::all());
-        return view('dashboard',[
+        return view('dashboard', [
             'ideas' => $ideas->paginate(5)
         ]);
     }
