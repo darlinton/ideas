@@ -10,14 +10,16 @@
                         </a></h5>
                 </div>
             </div>
-            <div>
-                <form method="POST" action="{{ route('ideas.destroy', $idea->id) }}">
-                    @method('delete')
-                    @csrf
+            <div class="d-flex align-items-center">
+                <a href="{{ route('ideas.show', $idea->id) }}"><span class="fas fa-eye me-1"></span></a>
+                @can('idea.edit', $idea)
                     <a href="{{ route('ideas.edit', $idea->id) }}"><span class="fas fa-pen-to-square me-1"></span></a>
-                    <a href="{{ route('ideas.show', $idea->id) }}"><span class="fas fa-eye me-1"></span></a>
-                    <button class="btn btn-danger btn-sm">X</button>
-                </form>
+                    <form method="POST" action="{{ route('ideas.destroy', $idea->id) }}">
+                        @method('delete')
+                        @csrf
+                        <button class="ms-1 btn btn-danger btn-sm">X</button>
+                    </form>
+                @endcan
             </div>
         </div>
     </div>
