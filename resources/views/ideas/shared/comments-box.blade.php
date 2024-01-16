@@ -3,6 +3,9 @@
         @csrf
         <div class="mb-3">
             <textarea name="content" class="fs-6 form-control" rows="1"></textarea>
+            @error('content')
+                <span class="d-block fs-6 text-danger mt-2">{{ $message }}</span>
+            @enderror
         </div>
         <div>
             <button type="submit" class="btn btn-primary btn-sm"> Post Comment </button>
@@ -17,7 +20,7 @@
                 <div class="d-flex justify-content-between">
                     <h6 class="">{{ $comment->user->name }}
                     </h6>
-                    <small class="fs-6 fw-light text-muted"> {{ $comment->created_at->diffForHumans()  }} </small>
+                    <small class="fs-6 fw-light text-muted"> {{ $comment->created_at->diffForHumans() }} </small>
                 </div>
                 <p class="fs-6 mt-3 fw-light">
                     {{ $comment->content }}
@@ -25,6 +28,6 @@
             </div>
         </div>
     @empty
-    <p class="text-center my-3">No comments found.</p>
+        <p class="text-center my-3">No comments found.</p>
     @endforelse
 </div>

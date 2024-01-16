@@ -12,7 +12,7 @@
             </div>
             <div class="d-flex align-items-center">
                 <a href="{{ route('ideas.show', $idea->id) }}"><span class="fas fa-eye me-1"></span></a>
-                @can('idea.edit', $idea)
+                @can('update', $idea)
                     <a href="{{ route('ideas.edit', $idea->id) }}"><span class="fas fa-pen-to-square me-1"></span></a>
                     <form method="POST" action="{{ route('ideas.destroy', $idea->id) }}">
                         @method('delete')

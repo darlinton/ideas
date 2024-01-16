@@ -27,7 +27,7 @@ class IdeaController extends Controller
     }
 
     public function destroy(Idea $idea){
-        $this->authorize('idea.delete', $idea);
+        $this->authorize('delete', $idea);
         //Idea::destroy($id); -error if id does not exist
         //$idea = Idea::where('id',$id)->firstOrFail()->delete();
         $idea->delete();
@@ -36,13 +36,13 @@ class IdeaController extends Controller
     }
 
     public function edit(Idea $idea){
-        $this->authorize('idea.edit', $idea);
+        $this->authorize('update', $idea);
         $editing = true;
         return view('ideas.show', compact('idea', 'editing'));
     }
 
     public function update(Idea $idea){
-        $this->authorize('idea.edit', $idea);
+        $this->authorize('update', $idea);
         $validated = request()->validate([
             'content' => 'required|min:3|max:240'
         ]);
